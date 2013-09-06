@@ -1546,6 +1546,15 @@
   FlagType               Flag;   
 #endif
 
+#if defined(OPENLRSNG)
+  #define RX_BOARD_TYPE 5
+  #define SERIAL_BAUD_RATE 115200 //115.200 baud serial port speed
+  #include "../openLRSng/hardware.h"
+  #include "../openLRSng/binding.h"
+  #include "../openLRSng/common.h"
+  #include "../openLRSng/RX.h"
+#endif
+
 #if defined(DESQUARED6DOFV2GO)
   #define ITG3200
   #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] =  Y; imu.gyroADC[PITCH] = -X; imu.gyroADC[YAW] = -Z;}
@@ -1779,7 +1788,7 @@
 
 //all new Special RX's must be added here
 //this is to avoid confusion :)
-#if !defined(SERIAL_SUM_PPM) && !defined(SPEKTRUM) && !defined(SBUS)
+#if !defined(SERIAL_SUM_PPM) && !defined(SPEKTRUM) && !defined(SBUS) && !defined(OPENLRSNG)
   #define STANDARD_RX
 #endif
 

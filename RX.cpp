@@ -405,7 +405,7 @@ void computeRC() {
   static uint16_t rcData4Values[RC_CHANS][4], rcDataMean[RC_CHANS];
   static uint8_t rc4ValuesIndex = 0;
   uint8_t chan,a;
-  #if !defined(OPENLRSv2MULTI) // dont know if this is right here
+  #if !defined(OPENLRSv2MULTI) && !defined(OPENLRSNG) // dont know if this is right here
     #if defined(SBUS)
       readSBus();
     #endif

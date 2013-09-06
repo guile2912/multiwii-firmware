@@ -621,6 +621,9 @@ void setup() {
   #if defined(OPENLRSv2MULTI)
     initOpenLRS();
   #endif
+  #if defined(OPENLRSNG)
+    openLRSNGsetup();
+  #endif
   initSensors();
   #if defined(I2C_GPS) || defined(GPS_SERIAL) || defined(GPS_FROM_OSD)
     GPS_set_pids();
@@ -781,6 +784,10 @@ void loop () {
     Read_OpenLRS_RC();
   #endif 
 
+  #if defined(OPENLRSNG) 
+    Read_OpenLRSNG_RC();
+  #endif
+  
   if (currentTime > rcTime ) { // 50Hz
     rcTime = currentTime + 20000;
     computeRC();
