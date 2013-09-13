@@ -1,6 +1,5 @@
-#include <EEPROM.h>
-
 // OpenLRSng binding
+#include <avr/eeprom.h>
 
 // Factory setting values, modify via the CLI
 
@@ -155,7 +154,7 @@ int16_t bindReadEeprom()
   /*for (uint8_t i = 0; i < sizeof(bind_data); i++) {
     *((uint8_t*)&bind_data + i) = EEPROM.read(EEPROM_OFFSET + 4 + i);
   }*/
-  eeprom_read_block(&bind_data, EEPROM_OFFSET + 4,sizeof(bind_data));
+  eeprom_read_block(&bind_data, (const void*)(EEPROM_OFFSET + 4),sizeof(bind_data));
 
   if (bind_data.version != BINDING_VERSION) {
     return 0;
@@ -301,8 +300,8 @@ void rxReadEeprom()
   } else {
     /*for (uint8_t i = 0; i < sizeof(rx_config); i++) {
       *((uint8_t*)&rx_config + i) = EEPROM.read(EEPROM_RX_OFFSET + 4 + i);*/
-      eeprom_read_block(&rx_config, EEPROM_RX_OFFSET + 4,sizeof(rx_config));
-    }
+      eeprom_read_block(&rx_config, (const void*)(EEPROM_RX_OFFSET + 4),sizeof(rx_config));
+    //}
     Serial.println("RXconf loaded");
   }
 }

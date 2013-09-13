@@ -211,12 +211,12 @@ void load_failsafe_values(void)
   uint8_t ee_buf[20];
 
   for (int16_t i = 0; i < 4; i++) {
-    ee_buf[i] = EEPROM.read(EEPROM_FAILSAFE_OFFSET + i);
+    ee_buf[i] = eeprom_read_byte((uint8_t *)(EEPROM_FAILSAFE_OFFSET + i));
   }
 
   if ((ee_buf[0]==0xFA) && (ee_buf[1]==0x11) && (ee_buf[2]==0x5A) && (ee_buf[3]==0xFE)) {
     for (int16_t i = 0; i < 20; i++) {
-      ee_buf[i] = EEPROM.read(EEPROM_FAILSAFE_OFFSET + 4 +i);
+      ee_buf[i] = eeprom_read_byte((uint8_t *)(EEPROM_FAILSAFE_OFFSET + 4 +i));
     }
     cli();
     unpackChannels(6, PPM, ee_buf);
@@ -339,7 +339,7 @@ uint8_t serial_tail;
 
 uint8_t hopcount;
 
-void setup()
+void openLRSNGsetup()
 {
   //LEDs
   pinMode(Green_LED, OUTPUT);
@@ -434,7 +434,7 @@ void checkSerial()
 }
 
 //############ MAIN LOOP ##############
-void loop()
+void Read_OpenLRSNG_RC()
 {
   uint32_t time;
 

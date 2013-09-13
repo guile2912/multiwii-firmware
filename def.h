@@ -1549,10 +1549,6 @@
 #if defined(OPENLRSNG)
   #define RX_BOARD_TYPE 5
   #define SERIAL_BAUD_RATE 115200 //115.200 baud serial port speed
-  #include "hardware.h"
-  #include "binding.h"
-  #include "common.h"
-  #include "RXOpenLRSNG.h"
 #endif
 
 #if defined(DESQUARED6DOFV2GO)

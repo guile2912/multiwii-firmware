@@ -51,7 +51,7 @@ typedef struct pinMask {
 #define Green_LED_OFF  PORTB &= ~_BV(3);
 
 #define PPM_Pin_Interrupt_Setup  PCMSK1 = 0x20;PCICR|=(1<<PCIE1);
-#define PPM_Signal_Interrupt PCINT1_vect
+#define PPM_Signal_Interrupt PCINT1_vect // Flytron M1 TX
 #define PPM_Signal_Edge_Check ((PINC & 0x20)==0x20)
 
 void buzzerInit()
@@ -133,7 +133,7 @@ void setupRfmInterrupt()
 #define Green_LED_OFF  PORTC &= ~_BV(3);PORTC &= ~_BV(2);
 
 #define PPM_Pin_Interrupt_Setup  PCMSK2 = 0x20;PCICR|=(1<<PCIE2);
-#define PPM_Signal_Interrupt PCINT2_vect
+#define PPM_Signal_Interrupt PCINT2_vect // Flytron M1 RX
 #define PPM_Signal_Edge_Check ((PIND & 0x20)==0x20)
 
 void buzzerInit()
@@ -192,7 +192,7 @@ void setupRfmInterrupt()
 
 #endif
 
-#if (BOARD_TYPE == 2)
+#if (BOARD_TYPE == 2) //TX Flytron openLRS M2/M3 TX unit -- OrangeRX UHF TX unit -- set TX_BOARD_TYPE 2
 #if (__AVR_ATmega328P__ != 1) || (F_CPU != 16000000)
 #error Wrong board selected, select Arduino Pro/Pro Mini 5V/16MHz w/ ATMega328
 #endif
@@ -215,7 +215,7 @@ void setupRfmInterrupt()
 #define Green_LED_OFF  PORTB &= ~_BV(4);
 
 #define PPM_Pin_Interrupt_Setup  PCMSK2 = 0x08;PCICR|=(1<<PCIE2);
-#define PPM_Signal_Interrupt PCINT2_vect
+#define PPM_Signal_Interrupt PCINT2_vect //TX
 #define PPM_Signal_Edge_Check ((PIND & 0x08)==0x08)
 
 void buzzerInit()
@@ -323,7 +323,11 @@ void buzzerOn(uint16_t freq)
 #define PPM_OUT 9 // OCP1A
 #define RSSI_OUT 3 // PD3 OC2B
 
+#if defined(OPENLRSNG)
+#define OUTPUTS 0 // outputs available : wii managing that
+#else
 #define OUTPUTS 13 // outputs available
+#endif
 
 const pinMask_t OUTPUT_MASKS[OUTPUTS] = {
   {0x00,0x00,0x08},{0x00,0x00,0x20},{0x00,0x00,0x40}, // RSSI, CH1, CH2

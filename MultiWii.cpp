@@ -9,6 +9,7 @@ March  2013     V2.2
 */
 
 #include <avr/io.h>
+#include <avr/eeprom.h>
 
 #include "Arduino.h"
 #include "config.h"
@@ -25,6 +26,13 @@ March  2013     V2.2
 #include "Serial.h"
 #include "GPS.h"
 #include "Protocol.h"
+
+#if defined(OPENLRSNG)
+  #include "hardware.h"
+  #include "binding.h"
+  #include "common.h"
+  #include "RXOpenLRSNG.h"
+#endif
 
 #include <avr/pgmspace.h>
 
